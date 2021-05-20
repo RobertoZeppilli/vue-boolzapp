@@ -58,14 +58,12 @@
                             <div class="contact-avatar">
                                 <img :src="getAvatar(index)" :alt="getAlt(index)">
                             </div>
-                            <div class="data">
-                                <div class="contact-data">
-                                    <h4>{{ contact.name }}</h4>
-                                    <p>lorem ipsum docet...</p>
-                                </div>
-                                <div class="message-date">
-                                    <p>10/01/2021 16:15:22</p>
-                                </div>
+                            <div class="contact-data">
+                                <h4>{{ contact.name }}</h4>
+                                <p>lorem ipsum docet...</p>
+                            </div>
+                            <div class="time">
+                                <p>10/01/2021 16:15:22</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +71,9 @@
                 </aside>
                 <!-- /contact navigation -->
 
+                <!-- chat -->
                 <section id="chat">
+                    <!-- active chat -->
                     <div class="active-chat">
                         <div class="interlocutor-container">
                             <div class="interlocutor-img">
@@ -90,6 +90,9 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
                     </div>
+                    <!-- /active chat -->
+
+                    <!-- chat box -->
                     <div class="chat-box">
                         <div class="sent-side">
                             <div class="message sent">
@@ -108,18 +111,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-input">
-                        <div class="smile">
-                            
+                    <!-- /chat box -->
+
+                    <!-- message field -->
+                    <div class="message-field">
+                        <div class="emoticons">
+                            <i class="far fa-smile"></i>
                         </div>
                         <div class="text">
-
+                            <input type="text" placeholder="scrivi un messaggio">
                         </div>
                         <div class="vocal">
-
+                            <i class="fas fa-microphone"></i>
                         </div>
                     </div>
+                    <!-- /message field -->
                 </section>
+                <!-- /chat -->
             </div>
             <!-- /wrapper -->
         </div>
