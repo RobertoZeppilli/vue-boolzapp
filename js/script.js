@@ -95,6 +95,13 @@ var app = new Vue(
             },
             getAlt: function (index) {
                 return this.contacts[index].name;
+            },
+            getContact: function (index) {
+                return this.contactIndex = index;
+            },
+            getLast: function (contact) {
+                let lastMessage = contact.messages.length - 1;
+                return contact.messages[lastMessage];
             }
         }
     }

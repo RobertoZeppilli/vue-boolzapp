@@ -13,6 +13,7 @@ body {
         #009688 15%, 
         #DADBD4 15%
     );
+    font-family: 'Ubuntu', sans-serif;
 }
 #root {
     display: flex;
@@ -21,19 +22,19 @@ body {
 .wrapper {
     display: flex;
     margin: auto;
-    height: 680px;
+    height: 95vh;
     width: 1200px;
-    background-color: red;
 }
 
 .active {
     background-color: #E9EBEB;
 }
+
 .message {
     display: flex;
     align-items: center;
     position: relative;
-    width: 200px;
+    width: 250px;
     margin-bottom: 10px;
     padding: 15px 10px;
     border-radius: 10px; 
@@ -45,7 +46,7 @@ body {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    font-size: .4em;
+    font-size: .5em;
     color: #B1B1B1;
 }
 .sent {
@@ -57,6 +58,7 @@ body {
 
 i {
     transition: transform .5s ease-in-out;
+    cursor: pointer;
 }
 i:hover {
     transform: scale(1.2);
@@ -83,7 +85,7 @@ i:hover {
     width: 80%;
 }
 .user-name img {
-    height: 30px;
+    height: 40px;
     margin-right: 10px;
     border-radius: 50%;
 }
@@ -99,7 +101,6 @@ i:hover {
 }
 .icons i {
     color: #B1B1B1;
-    cursor: pointer;
 }
 
 /* notification bell */
@@ -123,7 +124,7 @@ i:hover {
 .bell i {
     font-size: 1.3em;
     color: #8EDAFC;
-    cursor: pointer;
+    
 }
 
 .desktop-note h3 {
@@ -152,7 +153,6 @@ i:hover {
     padding: 10px 30px;
     border-radius: 5px;
     color: #B1B1B1;
-    cursor: pointer;
 }
 .find-chat input {
     padding: 10px 5px;
@@ -171,6 +171,7 @@ i:hover {
     display: flex;
     position: relative;
     padding: 10px 15px;
+    cursor: pointer;
 }
 .contact:not(:first-child) {
     border-top: 1px solid #B1B1B1;
@@ -196,10 +197,6 @@ i:hover {
     top: 10px;
 }
 
-
-
-
-
 /************************** CHAT **************************/
 #chat {
     display: flex;
@@ -211,7 +208,9 @@ i:hover {
 .active-chat {
     display: flex;
     align-items: center;
-    padding: 7.5px;
+    height: 60px;
+    padding: 10px;
+    border-left: 0.5px solid #B1B1B1;
     background-color: #EAEAEA;
 }
 .interlocutor-container {
@@ -223,7 +222,7 @@ i:hover {
     display: flex;
 }
 .interlocutor-img img {
-    height: 35px;
+    height: 40px;
     border-radius: 50%;
 }
 .interlocutor-data {
@@ -245,7 +244,6 @@ i:hover {
 }
 .actions i {
     color: #B1B1B1;  
-    cursor: pointer;
 }
 
 /* chat box */
@@ -272,15 +270,15 @@ i:hover {
     padding: 0 40px;
 }
 
-/* text-input */
+/* message-field */
 .message-field {
     display: flex;
     padding: 10px 0;
+    border-left: 0.5px solid #B1B1B1;
     background-color: #F3EEEA;
 }
 .message-field i {
     color: #7d7d7d;
-    cursor: pointer;
 }
 
 .emoticons {

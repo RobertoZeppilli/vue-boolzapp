@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
             integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -47,23 +49,23 @@
                     <!-- find chat -->
                     <div class="find-chat">
                         <span class="search"><i class="fas fa-search"></i></span>
-                        <input type="text" placeholder="Cerca o inizia una nuvoa chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <!-- /find chat -->
 
                     <!-- contacts -->
                     <div class="contacts">
                         <div v-for="(contact,index) in contacts" class="contact"
-                            :class="(contactIndex == index) ? 'active' : ''">
+                            :class="(contactIndex == index) ? 'active' : ''" @click="getContact(index)">
                             <div class="contact-avatar">
                                 <img :src="getAvatar(index)" :alt="getAlt(index)">
                             </div>
                             <div class="contact-data">
                                 <h4>{{ contact.name }}</h4>
-                                <p>lorem ipsum docet...</p>
+                                <p>{{ getLast(contact).text }}...</p>
                             </div>
                             <div class="time">
-                                <p>10/01/2021 16:15:22</p>
+                                <p>{{ getLast(contact).date }}</p>
                             </div>
                         </div>
                     </div>
