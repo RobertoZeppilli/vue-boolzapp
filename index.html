@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+            integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Boolzapp</title>
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- wrapper -->
+            <div class="wrapper">
+                <!-- contact navigation -->
+                <aside id="contact-nav">
+                    <!-- user -->
+                    <div class="user">
+                        <div class="user-name">
+                            <img src="img/avatar_io.jpg" alt="Utente">
+                            <h1>Nome Utente</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="fas fa-circle-notch"></i>
+                            <i class="fas fa-comment-alt"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+                    <!-- /user -->
+
+                    <!-- notification bell -->
+                    <div class="note">
+                        <div class="bell">
+                            <i class="fas fa-bell-slash"></i>
+                        </div>
+                        <div class="desktop-note">
+                            <h3>Ricevi notifiche di nuovi messaggi</h3>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </div>
+                    </div>
+                    <!-- /notification bell -->
+
+                    <!-- find chat -->
+                    <div class="find-chat">
+                        <span class="search"><i class="fas fa-search"></i></span>
+                        <input type="text" placeholder="Cerca o inizia una nuvoa chat">
+                    </div>
+                    <!-- /find chat -->
+
+                    <!-- contacts -->
+                    <div class="contacts">
+                        <div v-for="(contact,index) in contacts" class="contact"
+                            :class="(contactIndex == index) ? 'active' : ''">
+                            <div class="contact-avatar">
+                                <img :src="getAvatar(index)" :alt="getAlt(index)">
+                            </div>
+                            <div class="data">
+                                <div class="contact-data">
+                                    <h4>{{ contact.name }}</h4>
+                                    <p>lorem ipsum docet...</p>
+                                </div>
+                                <div class="message-date">
+                                    <p>10/01/2021 16:15:22</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /contacts -->
+                </aside>
+                <!-- /contact navigation -->
+
+                <section id="chat">
+                    <div class="active-chat">
+                        <div class="interlocutor-container">
+                            <div class="interlocutor-img">
+                                <img src="img/avatar_1.jpg" alt="Michele">
+                            </div>
+                            <div class="interlocutor-data">
+                                <h4>Michele</h4>
+                                <p>Ultimo accesso oggi alle 16:15:22</p>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+                    <div class="chat-box">
+                        <div class="sent-side">
+                            <div class="message sent">
+                                <p>Hai portato a spasso il cane?</p>
+                                <p class="message-date">10/01/2020 10:15:22</p>
+                            </div>
+                            <div class="message sent">
+                                <p>Ricordati di dargli da mangiare</p>
+                                <p class="message-date">10/01/2020 10:15:22</p>
+                            </div>
+                        </div>
+                        <div class="received-side">
+                            <div class="message received">
+                                <p>Tutto fatto!</p>
+                                <p class="message-date">10/01/2020 10:15:22</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-input">
+                        <div class="smile">
+                            
+                        </div>
+                        <div class="text">
+
+                        </div>
+                        <div class="vocal">
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- /wrapper -->
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+
+</html>
