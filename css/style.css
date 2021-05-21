@@ -11,7 +11,10 @@ body {
         to bottom, 
         #009688 0%, 
         #009688 15%, 
-        #DADBD4 15%
+        #d5ddd7 15%,
+        #d6ddd5 40%,
+        #f2f4f1 60%,
+        #e6e9dd 100%
     );
     font-family: 'Ubuntu', sans-serif;
 }
@@ -149,7 +152,7 @@ i:hover {
     transition: color .5s ease-in-out;
 }
 .desktop-note a:hover {
-    color: hsl(199, 95%, 47%);
+    color: #06a2ea;
 }
 
 /* find-chat input */

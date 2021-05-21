@@ -44,6 +44,11 @@ var app = new Vue(
                             date: '20/03/2020 16:35:00',
                             text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
+                        },
+                        {
+                            date: '20/03/2020 16:40:34',
+                            text: 'Ok non fa niente!',
+                            status: 'received'
                         }
                     ],
                 },
@@ -88,9 +93,21 @@ var app = new Vue(
                 },
             ],
             contactIndex: 0,
-            messageIndex: 0,
             newMessage: '',
-            newDate: ''
+            newDate: '',
+            // bonus
+            randomResponses: [
+                "Ricorda che devi fare la spesa per domani sera!",
+                "Sta calmo per favore!",
+                "Ho fatto tutto, ora vado a letto",
+                "Ieri ho visto Marco al pub, s'è scolato dieci birre e stava ancora in piedi!",
+                "Non minimizzare",
+                "Attento a te eh! hahahahaha",
+                "Oggi ho comprato anche la frutta per la macedonia..possiamo farla domani?",
+                "Ma senti na cosa, hai ascoltato l'ultimo album di Nick Cave?",
+                "Senti...non so come dirtelo ma non ho voglia di parlarti"
+            ]
+            // bonus
         },
         mounted: function () {
             this.newDate = dayjs().format('DD/MM/YY HH:mm:ss')
@@ -137,7 +154,7 @@ var app = new Vue(
             // a. navigo fino a messages
             // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora 
             // c. ottenuto un array assegno all'elemento di posizione 0 la variabile day, all'1 la variabile hour
-            // d. faccio il return della stringa tramite interpolazione
+            // d. se lo status dell'ultimo messaggio è settato su 'received', faccio il return dell'ultimo accesso, altrimenti (aggiunta bonus) stampo in pagina la stringa 'Sta scrivendo...' 
             getAccessDate: function () {
                 const getIntoMessages = this.contacts[this.contactIndex].messages;
 
@@ -145,23 +162,38 @@ var app = new Vue(
 
                 const day = getDate[0];
                 const hour = getDate[1];
-
-                return `Ultimo accesso il ${day} alle ${hour}`
+                if (getIntoMessages[getIntoMessages.length - 1].status == 'received') {
+                    return `Ultimo accesso il ${day} alle ${hour}`
+                } else {
+                    return 'Sta scrivendo...'
+                }
             },
 
             // 7. funzione per mandare messaggi
             // a. inizializzo nei data newMessage a stringa vuota
             // b. pusho il nuovo oggetto con dentro il newMessage (che sarà inviato tramite @keydown.enter), la newDate (impostata con dayJS) e lo status (impostato su 'sent' in modo da far comparire il messaggio sempre a destra)
+            // c. aggiunta bonus: messaggio automatico per simulare una conversazione
             sendMessage: function (contact) {
+
                 if (this.newMessage.trim().length > 0) {
                     contact.messages.push({
-                        date: this.newDate,
+                        date: dayjs().format('DD/MM/YY HH:mm:ss'),
                         text: this.newMessage,
                         status: 'sent'
                     })
+                    // risposta automatica
+                    setTimeout(() => {
+                        this.contacts[this.contactIndex].messages.push({
+                            date: dayjs().format('DD/MM/YY HH:mm:ss'),
+                            text: this.randomResponses[Math.floor(Math.random() * (this.randomResponses.length - 1))],
+                            status: 'received'
+                        })
+                    }, 4000);
+                    // /risposta automatica
                 }
                 this.newMessage = "";
-            }
+            },
+
         }
     }
 );
