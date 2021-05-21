@@ -71,7 +71,7 @@ var app = new Vue(
                 },
                 {
                     name: 'Luisa',
-                    avatar: '_4',
+                    avatar: '_6',
                     visible: true,
                     messages: [
                         {
@@ -87,21 +87,80 @@ var app = new Vue(
                     ],
                 },
             ],
-            contactIndex: 0
+            contactIndex: 0,
+            messageIndex: 0,
+            newMessage: '',
+            newDate: ''
+        },
+        mounted: function () {
+            this.newDate = dayjs().format('DD/MM/YY HH:mm:ss')
         },
         methods: {
+
+            // 1. funzione per rendere dinamici gli avatar dei contatti
             getAvatar: function (index) {
-                return "img/" + "avatar" + this.contacts[index].avatar + ".jpg";
+                let pic = this.contacts[index].avatar;
+                return `img/avatar${pic}.jpg`;
             },
+
+            // 2. funzione per rendere dinamico l'alt di ogni avatar
             getAlt: function (index) {
                 return this.contacts[index].name;
             },
+
+            // 3. funzione per rendere dinamico l'active al click su ogni contatto
             getContact: function (index) {
                 return this.contactIndex = index;
             },
-            getLast: function (contact) {
+
+            // 4. funzione per recuperare la data dell'ultimo messaggio inviato
+            getLastDate: function (contact) {
+                let lastDate = contact.messages.length - 1;
+                return contact.messages[lastDate].date;
+            },
+
+            // 5. funzione per recuperare l'ultimo messaggio inviato
+            // a. se la lunghezza del messaggio supera i 30 caratteri la tronco inserendo i puntini, altrimenti la lascio intera
+            getLastMessage: function (contact) {
                 let lastMessage = contact.messages.length - 1;
-                return contact.messages[lastMessage];
+
+                let lastMessageLength = contact.messages[lastMessage].text.length;
+
+                if (lastMessageLength > 30) {
+                    return contact.messages[lastMessage].text.substr(0, 30) + "...";
+                } else {
+                    return contact.messages[lastMessage].text;
+                }
+            },
+
+            // 6. funzione per scrivere in pagina l'ultimo accesso
+            // a. navigo fino a messages
+            // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora 
+            // c. ottenuto un array assegno all'elemento di posizione 0 la variabile day, all'1 la variabile hour
+            // d. faccio il return della stringa tramite interpolazione
+            getAccessDate: function () {
+                const getIntoMessages = this.contacts[this.contactIndex].messages;
+
+                const getDate = getIntoMessages[getIntoMessages.length - 1].date.split(" ");
+
+                const day = getDate[0];
+                const hour = getDate[1];
+
+                return `Ultimo accesso il ${day} alle ${hour}`
+            },
+
+            // 7. funzione per mandare messaggi
+            // a. inizializzo nei data newMessage a stringa vuota
+            // b. pusho il nuovo oggetto con dentro il newMessage (che sarà inviato tramite @keydown.enter), la newDate (impostata con dayJS) e lo status (impostato su 'sent' in modo da far comparire il messaggio sempre a destra)
+            sendMessage: function (contact) {
+                if (this.newMessage.trim().length > 0) {
+                    contact.messages.push({
+                        date: this.newDate,
+                        text: this.newMessage,
+                        status: 'sent'
+                    })
+                }
+                this.newMessage = "";
             }
         }
     }

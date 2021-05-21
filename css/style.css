@@ -26,6 +26,12 @@ body {
     width: 1200px;
 }
 
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
 .active {
     background-color: #E9EBEB;
 }
@@ -36,20 +42,20 @@ body {
     position: relative;
     width: 250px;
     margin-bottom: 10px;
-    padding: 15px 10px;
+    padding: 20px 10px;
+    font-size: .8em;
     border-radius: 10px; 
 }
-.message p:first-child {
-    font-size: .7em;
-}
+
 .message-date {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    font-size: .5em;
+    font-size: .6em;
     color: #B1B1B1;
 }
 .sent {
+    align-self: flex-end;
     background-color: #D5F9BA;
 }
 .received {
@@ -62,6 +68,18 @@ i {
 }
 i:hover {
     transform: scale(1.2);
+}
+
+.w-10 {
+    width: 10%;
+}
+
+/* colors */
+.grey {
+    color: #7d7d7d;
+}
+.light-g {
+    color: #B1B1B1;
 }
 /************************** CONTACT NAVIGATION **************************/
 #contact-nav {
@@ -90,7 +108,7 @@ i:hover {
     border-radius: 50%;
 }
 .user-name h1 {
-    font-size: .7em;
+    font-size: .8em;
 }
 
 .icons {
@@ -98,9 +116,6 @@ i:hover {
     width: 20%;
     align-items: center;
     justify-content: space-between;
-}
-.icons i {
-    color: #B1B1B1;
 }
 
 /* notification bell */
@@ -124,7 +139,6 @@ i:hover {
 .bell i {
     font-size: 1.3em;
     color: #8EDAFC;
-    
 }
 
 .desktop-note h3 {
@@ -132,7 +146,6 @@ i:hover {
 }
 .desktop-note a {
     font-size: .7em;
-    color: #7d7d7d;
     transition: color .5s ease-in-out;
 }
 .desktop-note a:hover {
@@ -152,7 +165,6 @@ i:hover {
     display: inline-block;
     padding: 10px 30px;
     border-radius: 5px;
-    color: #B1B1B1;
 }
 .find-chat input {
     padding: 10px 5px;
@@ -171,7 +183,11 @@ i:hover {
     display: flex;
     position: relative;
     padding: 10px 15px;
+    transition: background-color .5s ease-in-out;
     cursor: pointer;
+}
+.contact:hover {
+    background-color: #f4f0f0fa;
 }
 .contact:not(:first-child) {
     border-top: 1px solid #B1B1B1;
@@ -188,7 +204,6 @@ i:hover {
 .contact-data p,
 .time p {
     font-size: .7em;
-    color: #B1B1B1;
 }
 
 .time {
@@ -233,7 +248,6 @@ i:hover {
 }
 .interlocutor-data p {
     font-size: .6em;
-    color: #B1B1B1;
 }
 
 .actions {
@@ -242,9 +256,6 @@ i:hover {
     padding: 0 10px;
     width: 15%;
 }
-.actions i {
-    color: #B1B1B1;  
-}
 
 /* chat box */
 .chat-box {
@@ -252,24 +263,13 @@ i:hover {
     flex-direction: column;
     height: calc(100% - 105px);
     overflow-y: scroll;
-    padding: 30px 0;
     background-image: url(../img/mine.jpg);
 }
 
-.sent-side {
-    display: flex;
+.messages {
     flex-direction: column;
-    align-items: flex-end;
-    padding: 0 40px;
-}
-
-.received-side {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 40px;
 }
-
 /* message-field */
 .message-field {
     display: flex;
@@ -277,18 +277,9 @@ i:hover {
     border-left: 0.5px solid #B1B1B1;
     background-color: #F3EEEA;
 }
-.message-field i {
-    color: #7d7d7d;
-}
 
-.emoticons {
-    width: 10%;
-}
 .text {
     width: 80%;
-}
-.vocal {
-    width: 10%;
 }
 
 .text,
