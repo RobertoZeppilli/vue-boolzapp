@@ -24,13 +24,16 @@
                 <!-- contact navigation -->
                 <aside id="contact-nav">
                     <!-- user -->
-                    <div class="user">
+                    <div class="user" :class="(darkMode == false) ? 'bg-light' : 'darkmode'">
                         <div class="user-name">
                             <img src="img/avatar_8.jpg" alt="Utente">
                             <h1>Roberto Zeppilli</h1>
                         </div>
                         <div class="icons light-g">
-                            <i class="fas fa-circle-notch"></i>
+                            <span @click="toggleDarkMode" class="darktoggle">
+                                {{ toggleIcon }}
+                                <i class="fas fa-circle-notch"></i>
+                            </span>
                             <i class="fas fa-comment-alt"></i>
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
@@ -38,11 +41,11 @@
                     <!-- /user -->
 
                     <!-- notification bell -->
-                    <div class="note">
-                        <div class="bell">
+                    <div :class="(darkMode == false) ? 'note' : 'dark-note'">
+                        <div :class="(darkMode == false) ? 'bell' : 'dark-bell'">
                             <i class="fas fa-bell-slash"></i>
                         </div>
-                        <div class="desktop-note">
+                        <div :class="(darkMode == false) ? 'desktop-note' : 'desktop-note-dark'">
                             <h3>Ricevi notifiche di nuovi messaggi</h3>
                             <a class="grey" href="#">Attiva notifiche desktop</a>
                         </div>
@@ -50,16 +53,17 @@
                     <!-- /notification bell -->
 
                     <!-- find chat -->
-                    <div class="find-chat">
+                    <div class="find-chat" :class="(darkMode == false) ? 'bg-light' : 'darkmode'">
                         <label for="search" class="search light-g"><i class="fas fa-search"></i></label>
-                        <input type="text" name="search" placeholder="Cerca o inizia una nuova chat">
+                        <input v-model="newSearch" type="text" name="search" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <!-- /find chat -->
 
                     <!-- contacts -->
                     <div class="contacts">
                         <div v-for="(contact,index) in contacts" class="contact"
-                            :class="(contactIndex == index) ? 'active' : ''" @click="getContact(index)">
+                            :class="(contactIndex == index) ? 'active' : ''" :id="(darkMode == false) ? '' : 'darkmode'"
+                            @click="getContact(index)">
                             <div class="contact-avatar">
                                 <img :src="getAvatar(index)" :alt="getAlt(index)">
                             </div>
@@ -79,7 +83,7 @@
                 <!-- chat -->
                 <section id="chat" v-for="(contact,index) in contacts" v-if="(contactIndex == index)">
                     <!-- active chat -->
-                    <div class="active-chat">
+                    <div class="active-chat" :class="(darkMode == false) ? 'bg-light' : 'darkmode'">
                         <div class="interlocutor-container">
                             <div class="interlocutor-img">
                                 <img :src="getAvatar(index)" :alt="getAlt(index)">
@@ -98,7 +102,7 @@
                     <!-- /active chat -->
 
                     <!-- chat box -->
-                    <div class="chat-box">
+                    <div :class="(darkMode == false) ? 'chat-box' : 'dark-chat'">
                         <div class="container">
                             <div class="messages" v-for="message in contacts[contactIndex].messages">
                                 <p :class="(message.status == 'sent') ? 'message sent' : 'message received'">
@@ -111,7 +115,7 @@
                     <!-- /chat box -->
 
                     <!-- message field -->
-                    <div class="message-field">
+                    <div class="message-field" :class="(darkMode == false) ? 'bg-light' : 'darkmode'">
                         <div class="emoticons w-10">
                             <i class="far fa-smile grey"></i>
                         </div>

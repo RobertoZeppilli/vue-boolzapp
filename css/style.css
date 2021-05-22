@@ -38,6 +38,21 @@ body {
 .active {
     background-color: #E9EBEB;
 }
+.darkmode {
+    background-color: #191919;
+    color: #fff;
+}
+#darkmode {
+    background-color: #191919;
+    color: #fff;
+}
+#darkmode:hover {
+    background-color: #E9EBEB;
+    color: #191919;
+}
+.bg-light {
+    background-color: #FAFAFA;
+}
 
 .message {
     display: flex;
@@ -97,13 +112,12 @@ i:hover {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: #EAEAEA;
 }
 
 .user-name {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 70%;
 }
 .user-name img {
     height: 40px;
@@ -116,20 +130,42 @@ i:hover {
 
 .icons {
     display: flex;
-    width: 20%;
+    width: 30%;
     align-items: center;
     justify-content: space-between;
 }
-
+.darktoggle {
+    font-size: .7em;
+    transition: transform .5s ease-in-out;
+    cursor: pointer;
+}
+.darktoggle:hover {
+    transform: scale(1.2);
+}
 /* notification bell */
-.note {
+.note,
+.dark-note {
     display: flex;
     align-items: center;
     padding: 10px 20px;
+}
+.note {
     background-color: #8EDAFC;
 }
-
+.dark-note {
+    background-color: #515558;
+}
+.dark-bell {
+    background-color: #fff;
+    font-size: 1.3em;
+    color: #515558;
+}
 .bell {
+    background-color: #fff;
+}
+
+.bell,
+.dark-bell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,22 +173,31 @@ i:hover {
     width: 50px;
     margin-right: 10px;
     border-radius: 50%;
-    background-color: #fff;
 }
 .bell i {
     font-size: 1.3em;
     color: #8EDAFC;
 }
-
-.desktop-note h3 {
+.desktop-note-dark {
+    color: #fff;
+}
+.desktop-note h3,
+.desktop-note-dark h3 {
     font-size: .9em;
 }
-.desktop-note a {
+.desktop-note a,
+.desktop-note-dark a {
     font-size: .7em;
     transition: color .5s ease-in-out;
 }
+.desktop-note-dark a {
+    color: #191919;
+}
 .desktop-note a:hover {
     color: #06a2ea;
+}
+.desktop-note-dark a:hover {
+    color: #fff;
 }
 
 /* find-chat input */
@@ -161,7 +206,6 @@ i:hover {
     justify-content: center;
     align-items: center;
     padding: 5px;
-    background-color: #FAFAFA;
 }
 
 .find-chat .search {
@@ -229,7 +273,6 @@ i:hover {
     height: 60px;
     padding: 10px;
     border-left: 0.5px solid #B1B1B1;
-    background-color: #EAEAEA;
 }
 .interlocutor-container {
     display: flex;
@@ -261,12 +304,19 @@ i:hover {
 }
 
 /* chat box */
-.chat-box {
+.chat-box,
+.dark-chat {
     display: flex;
     flex-direction: column;
     height: calc(100% - 105px);
     overflow-y: scroll;
+}
+.chat-box {
     background-image: url(../img/mine.jpg);
+}
+.dark-chat {
+    background-image: url(../img/darkbg.jpg);
+    background-size: contain;
 }
 
 .messages {
@@ -278,7 +328,6 @@ i:hover {
     display: flex;
     padding: 10px 0;
     border-left: 0.5px solid #B1B1B1;
-    background-color: #F3EEEA;
 }
 
 .text {

@@ -75,18 +75,86 @@ var app = new Vue(
                     ],
                 },
                 {
+                    name: 'Gigi',
+                    avatar: '_4',
+                    visible: true,
+                    messages: [
+                        {
+                            date: '10/01/2020 15:30:55',
+                            text: 'Ho studiato Vue.js tutto il giorno, mi sta piacendo un sacco!',
+                            status: 'sent'
+                        },
+                        {
+                            date: '10/01/2020 15:50:00',
+                            text: "Ah, e cos'è sto Vue.js?",
+                            status: 'received'
+                        }
+                    ],
+                },
+                {
+                    name: 'Francesco',
+                    avatar: '_5',
+                    visible: true,
+                    messages: [
+                        {
+                            date: '14/05/2021 16:30:55',
+                            text: 'Hahahahahahahaha non ci credo',
+                            status: 'sent'
+                        },
+                        {
+                            date: '14/05/2021 17:50:00',
+                            text: "Quando l'ho scoperto ci sono rimasto hahahaha",
+                            status: 'received'
+                        }
+                    ],
+                },
+                {
                     name: 'Luisa',
                     avatar: '_6',
                     visible: true,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
-                            text: 'Lo sai che ha aperto una nuova pizzeria?',
+                            text: 'Conosci Carmelo Bene? Sto guardando suoi vecchi video su YouTube ed è un personaggio fantastico!',
                             status: 'sent'
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            text: 'Si, ma preferirei andare al cinema',
+                            text: 'Certo che lo conosco! ricordo una puntata al Costanzo Show hahahaha grande personaggio!',
+                            status: 'received'
+                        }
+                    ],
+                },
+                {
+                    name: 'Giuseppe',
+                    avatar: '_7',
+                    visible: true,
+                    messages: [
+                        {
+                            date: '10/01/2020 15:30:55',
+                            text: 'Sei mai stato ad Amsterdam?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '10/01/2020 15:50:00',
+                            text: 'Si, tanti anni fa ci sono stato un mese intero..bellissima città :)',
+                            status: 'received'
+                        }
+                    ],
+                },
+                {
+                    name: 'Andrea',
+                    avatar: '_8',
+                    visible: true,
+                    messages: [
+                        {
+                            date: '10/01/2020 15:30:55',
+                            text: 'Andrè, ma come stai? Ho saputo che non sei stato molto bene ultimamente',
+                            status: 'sent'
+                        },
+                        {
+                            date: '10/01/2020 15:50:00',
+                            text: 'Meglio grazie, mi sto riprendendo piano piano ;)',
                             status: 'received'
                         }
                     ],
@@ -95,6 +163,7 @@ var app = new Vue(
             contactIndex: 0,
             newMessage: '',
             newDate: '',
+            newSearch: '',
             // bonus
             randomResponses: [
                 "Ricorda che devi fare la spesa per domani sera!",
@@ -106,8 +175,10 @@ var app = new Vue(
                 "Oggi ho comprato anche la frutta per la macedonia..possiamo farla domani?",
                 "Ma senti na cosa, hai ascoltato l'ultimo album di Nick Cave?",
                 "Senti...non so come dirtelo ma non ho voglia di parlarti"
-            ]
+            ],
             // bonus
+            darkMode: false,
+            toggleIcon: 'Dark'
         },
         mounted: function () {
             this.newDate = dayjs().format('DD/MM/YY HH:mm:ss')
@@ -193,6 +264,22 @@ var app = new Vue(
                 }
                 this.newMessage = "";
             },
+            // getName: function (contact) {
+            //     if (this.newSearch == contact.name) {
+            //         return contact.name
+            //     }
+            //     console.log("prendi nome")
+            // }
+            toggleDarkMode: function () {
+                this.darkMode = !this.darkMode
+
+                if (this.darkMode == true) {
+                    this.toggleIcon = 'Light'
+                } else {
+                    this.toggleIcon = 'Dark'
+                }
+                // console.log(this.darkMode);
+            }
 
         }
     }
