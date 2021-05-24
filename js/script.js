@@ -75,7 +75,7 @@ var app = new Vue(
                     ],
                 },
                 {
-                    name: 'Gigi',
+                    name: 'Marco',
                     avatar: '_4',
                     visible: true,
                     messages: [
@@ -92,7 +92,7 @@ var app = new Vue(
                     ],
                 },
                 {
-                    name: 'Francesco',
+                    name: 'Matteo',
                     avatar: '_5',
                     visible: true,
                     messages: [
@@ -109,7 +109,7 @@ var app = new Vue(
                     ],
                 },
                 {
-                    name: 'Luisa',
+                    name: 'Martina',
                     avatar: '_6',
                     visible: true,
                     messages: [
@@ -143,18 +143,18 @@ var app = new Vue(
                     ],
                 },
                 {
-                    name: 'Andrea',
-                    avatar: '_8',
+                    name: 'Giulia',
+                    avatar: '_io',
                     visible: true,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
-                            text: 'Andrè, ma come stai? Ho saputo che non sei stato molto bene ultimamente',
+                            text: 'Ciao Giulia ma come stai? Ho saputo che non sei stata molto bene ultimamente',
                             status: 'sent'
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            text: 'Meglio grazie, mi sto riprendendo piano piano ;)',
+                            text: 'Meglio grazie, mi sto riprendendo piano piano ;) Tu invece tutto ok?',
                             status: 'received'
                         }
                     ],
@@ -162,7 +162,6 @@ var app = new Vue(
             ],
             contactIndex: 0,
             newMessage: '',
-            newDate: '',
             newSearch: '',
             // bonus
             randomResponses: [
@@ -174,14 +173,23 @@ var app = new Vue(
                 "Attento a te eh! hahahahaha",
                 "Oggi ho comprato anche la frutta per la macedonia..possiamo farla domani?",
                 "Ma senti na cosa, hai ascoltato l'ultimo album di Nick Cave?",
-                "Senti...non so come dirtelo ma non ho voglia di parlarti"
+                "Senti...non so come dirtelo ma non ho voglia di parlarti",
+                "Ciao",
+                "Si lo conosco! Forte",
+                "Ho un dolore ai piedi incredibile",
+                "Boolzapp mi piace di più in dark-mode",
+                "Credi che il cane sia contento di restare solo? io non credo :/",
+                "Porta anche qualcosa da bere se ce la fai coi tempi! Ti stiamo aspettando!"
             ],
-            // bonus
             darkMode: false,
             toggleIcon: 'Dark'
+            // bonus
         },
-        mounted: function () {
-            this.newDate = dayjs().format('DD/MM/YY HH:mm:ss')
+        // updated. permettere all'ultimo messaggio inviato di essere visto indipendentemente dallo scroll
+        updated: () => {
+            const message = document.getElementsByClassName("message");
+            const lastMessageSent = message[message.length - 1];
+            lastMessageSent.scrollIntoView();
         },
         methods: {
 
@@ -223,9 +231,9 @@ var app = new Vue(
 
             // 6. funzione per scrivere in pagina l'ultimo accesso
             // a. navigo fino a messages
-            // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora 
+            // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora
             // c. ottenuto un array assegno all'elemento di posizione 0 la variabile day, all'1 la variabile hour
-            // d. se lo status dell'ultimo messaggio è settato su 'received', faccio il return dell'ultimo accesso, altrimenti (aggiunta bonus) stampo in pagina la stringa 'Sta scrivendo...' 
+            // d. se lo status dell'ultimo messaggio è settato su 'received', faccio il return dell'ultimo accesso, altrimenti (aggiunta bonus) stampo in pagina la stringa 'Sta scrivendo...'
             getAccessDate: function () {
                 const getIntoMessages = this.contacts[this.contactIndex].messages;
 
@@ -259,17 +267,12 @@ var app = new Vue(
                             text: this.randomResponses[Math.floor(Math.random() * (this.randomResponses.length - 1))],
                             status: 'received'
                         })
-                    }, 4000);
+                    }, 6000);
                     // /risposta automatica
                 }
                 this.newMessage = "";
             },
-            // getName: function (contact) {
-            //     if (this.newSearch == contact.name) {
-            //         return contact.name
-            //     }
-            //     console.log("prendi nome")
-            // }
+            // 8. (aggiunta bonus) funzione per la dark mode
             toggleDarkMode: function () {
                 this.darkMode = !this.darkMode
 
@@ -278,9 +281,19 @@ var app = new Vue(
                 } else {
                     this.toggleIcon = 'Dark'
                 }
-                // console.log(this.darkMode);
+            },
+            // 9. funzione per cercare contatti in base all'input
+            searchContact: function () {
+                this.contacts.forEach(
+                    contact => {
+                        if (contact.name.toLowerCase().includes(this.newSearch.toLowerCase())) {
+                            contact.visible = true;
+                        } else {
+                            contact.visible = false
+                        }
+                    }
+                );
             }
-
         }
     }
 );

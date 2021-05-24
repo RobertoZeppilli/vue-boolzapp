@@ -18,6 +18,7 @@ body {
     );
     font-family: 'Ubuntu', sans-serif;
 }
+
 #root {
     display: flex;
     height: 100vh;
@@ -80,6 +81,10 @@ body {
     background-color: #FFFFFF;
 }
 
+input:focus {
+    box-shadow: 0 0 5px #D5F9BA;
+}
+
 i {
     transition: transform .5s ease-in-out;
     cursor: pointer;
@@ -91,6 +96,8 @@ i:hover {
 .w-10 {
     width: 10%;
 }
+
+
 
 /* colors */
 .grey {
@@ -156,14 +163,9 @@ i:hover {
     background-color: #515558;
 }
 .dark-bell {
-    background-color: #fff;
     font-size: 1.3em;
     color: #515558;
 }
-.bell {
-    background-color: #fff;
-}
-
 .bell,
 .dark-bell {
     display: flex;
@@ -173,6 +175,7 @@ i:hover {
     width: 50px;
     margin-right: 10px;
     border-radius: 50%;
+    background-color: #fff;
 }
 .bell i {
     font-size: 1.3em;
@@ -214,10 +217,11 @@ i:hover {
     border-radius: 5px;
 }
 .find-chat input {
-    padding: 10px 5px;
+    padding: 10px;
     flex-grow: 2;
     border: none;
     border-radius: 5px;
+    outline: none;
 }
 
 /* on screen contacts */
@@ -309,7 +313,7 @@ i:hover {
     display: flex;
     flex-direction: column;
     height: calc(100% - 105px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .chat-box {
     background-image: url(../img/mine.jpg);
@@ -329,7 +333,9 @@ i:hover {
     padding: 10px 0;
     border-left: 0.5px solid #B1B1B1;
 }
-
+.message-field i {
+    font-size: 1.2em;
+}
 .text {
     width: 80%;
 }
@@ -347,4 +353,10 @@ i:hover {
     padding: 10px;
     border: none;
     border-radius: 5px;
+    outline: none;
 }
+
+.no_display {
+    display: none;
+}
+

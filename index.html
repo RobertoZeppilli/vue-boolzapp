@@ -54,16 +54,19 @@
 
                     <!-- find chat -->
                     <div class="find-chat" :class="(darkMode == false) ? 'bg-light' : 'darkmode'">
-                        <label for="search" class="search light-g"><i class="fas fa-search"></i></label>
-                        <input v-model="newSearch" type="text" name="search" placeholder="Cerca o inizia una nuova chat">
+                        <label for="search" class="search light-g" @change="searchContact">
+                            <i class="fas fa-search"></i>
+                        </label>
+                        <input type="text" name="search" v-model="newSearch" placeholder="Cerca o inizia una nuova chat"
+                            @change="searchContact">
                     </div>
                     <!-- /find chat -->
 
                     <!-- contacts -->
                     <div class="contacts">
                         <div v-for="(contact,index) in contacts" class="contact"
-                            :class="(contactIndex == index) ? 'active' : ''" :id="(darkMode == false) ? '' : 'darkmode'"
-                            @click="getContact(index)">
+                            :class="{'active' : index == contactIndex, 'no_display' : contact.visible == false}"
+                            :id="(darkMode == false) ? '' : 'darkmode'" @click="getContact(index)">
                             <div class="contact-avatar">
                                 <img :src="getAvatar(index)" :alt="getAlt(index)">
                             </div>
