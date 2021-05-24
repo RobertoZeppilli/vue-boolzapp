@@ -225,10 +225,17 @@ i:hover {
 }
 
 /* on screen contacts */
-.contacts {
+.contacts,
+.contacts-dark {
     height: calc(100% - 165px);
     overflow-y: scroll;
+    /* background-color: #fff; */
+}
+.contacts {
     background-color: #fff;
+}
+.contacts-dark {
+    background-color: #515558;
 }
 .contact {
     display: flex;

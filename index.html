@@ -63,7 +63,7 @@
                     <!-- /find chat -->
 
                     <!-- contacts -->
-                    <div class="contacts">
+                    <div :class="(darkMode == false) ? 'contacts' : 'contacts-dark'">
                         <div v-for="(contact,index) in contacts" class="contact"
                             :class="{'active' : index == contactIndex, 'no_display' : contact.visible == false}"
                             :id="(darkMode == false) ? '' : 'darkmode'" @click="getContact(index)">
