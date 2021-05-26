@@ -163,7 +163,7 @@ var app = new Vue(
             contactIndex: 0,
             newMessage: '',
             newSearch: '',
-            messageIndex: -1,
+            messageIndex: 0,
             randomResponses: [
                 "Ricorda che devi fare la spesa per domani sera!",
                 "Sta calmo per favore!",
@@ -236,14 +236,14 @@ var app = new Vue(
             // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora
             // c. ottenuto un array assegno all'elemento di posizione 0 la variabile day, all'1 la variabile hour
             // d. se lo status dell'ultimo messaggio è settato su 'received', faccio il return dell'ultimo accesso, altrimenti (aggiunta bonus) stampo in pagina la stringa 'Sta scrivendo...'
-            getAccessDate: function (index) {
+            getAccessDate: function () {
 
-                let messagesLength = this.contacts[index].messages.length - 1;
+                let messagesLength = this.contacts[this.contactIndex].messages.length - 1;
                 if (messagesLength == -1) {
                     return "Nessun accesso recente";
                 }
 
-                let getIntoMessages = this.contacts[index].messages;
+                let getIntoMessages = this.contacts[this.contactIndex].messages;
 
                 let getDate = getIntoMessages[getIntoMessages.length - 1].date.split(" ");
 
@@ -308,10 +308,6 @@ var app = new Vue(
             // 10. rimozione messaggio
             removeMessage: function (msgIndex) {
                 this.contacts[this.contactIndex].messages.splice(msgIndex, 1)
-
-                if (this.contacts[this.contactIndex].messages.length == 0) {
-                    this.contacts[this.contactIndex].messages.splice(this.contactIndex, 1);
-                }
                 this.dropdown = false;
             },
             // 11. funzione per il toggle

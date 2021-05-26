@@ -61,7 +61,7 @@ body {
     position: relative;
     width: 250px;
     margin-bottom: 10px;
-    padding: 20px 10px;
+    padding: 20px 15px;
     font-size: .8em;
     border-radius: 10px; 
 }
@@ -70,6 +70,8 @@ body {
     align-self: flex-end;
     position: absolute;
     right: 5px;
+    bottom: 30%;
+    transform: translateY(-30%);
     color: #7d7d7d;
     cursor: pointer;
 }
