@@ -72,10 +72,10 @@
                             </div>
                             <div class="contact-data">
                                 <h4>{{ contact.name }}</h4>
-                                <p class="light-g">{{ getLastMessage(contact) }}</p>
+                                <p class="light-g">{{ getLastMessage(contact, index) }}</p>
                             </div>
                             <div class="time">
-                                <p class="light-g">{{ getLastDate(contact) }}</p>
+                                <p class="light-g">{{ getLastDate(index) }}</p>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                             </div>
                             <div class="interlocutor-data">
                                 <h4>{{ contact.name }}</h4>
-                                <p class="light-g">{{ getAccessDate() }}</p>
+                                <p class="light-g">{{ getAccessDate(contactIndex) }}</p>
                             </div>
                         </div>
                         <div class="actions light-g">
@@ -107,9 +107,14 @@
                     <!-- chat box -->
                     <div :class="(darkMode == false) ? 'chat-box' : 'dark-chat'">
                         <div class="container">
-                            <div class="messages" v-for="message in contacts[contactIndex].messages">
-                                <p :class="(message.status == 'sent') ? 'message sent' : 'message received'">
+                            <div id="messages" v-for="message,index in contacts[contactIndex].messages">
+                                <p class="message" :class="message.status">
                                     {{ message.text }}
+                                    <i class="fas fa-chevron-down" @click="dropdownToggle(index)">
+                                    </i>
+                                    <span class="dropdown-size" v-show="dropdown == true && messageIndex == index">
+                                        <a href="#" @click="removeMessage(messageIndex)">Delete Message</a>
+                                    </span>
                                     <span class="message-date">{{ message.date }}</span>
                                 </p>
                             </div>

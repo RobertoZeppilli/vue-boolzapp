@@ -65,6 +65,39 @@ body {
     font-size: .8em;
     border-radius: 10px; 
 }
+.message i {
+    display: none;
+    align-self: flex-end;
+    position: absolute;
+    right: 5px;
+    color: #7d7d7d;
+    cursor: pointer;
+}
+.message:hover i {
+    display: inline-block;
+}
+
+.dropdown-size {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: #fff;
+    z-index: 10;
+}
+.dropdown-size a {
+    text-decoration: none;
+    font-size: .8em;
+    display: block;
+    padding: 10px;
+    transition: all .3s ease-in-out;
+    color: #7d7d7d;
+    
+}
+.dropdown-size a:hover {
+    color: hsl(0, 51%, 49%);
+    background-color: #B1B1B1;
+}
 
 .message-date {
     position: absolute;
@@ -229,7 +262,6 @@ i:hover {
 .contacts-dark {
     height: calc(100% - 165px);
     overflow-y: scroll;
-    /* background-color: #fff; */
 }
 .contacts {
     background-color: #fff;
@@ -330,7 +362,7 @@ i:hover {
     background-size: contain;
 }
 
-.messages {
+#messages {
     flex-direction: column;
     display: flex;
 }

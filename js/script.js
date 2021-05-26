@@ -163,7 +163,7 @@ var app = new Vue(
             contactIndex: 0,
             newMessage: '',
             newSearch: '',
-            // bonus
+            messageIndex: -1,
             randomResponses: [
                 "Ricorda che devi fare la spesa per domani sera!",
                 "Sta calmo per favore!",
@@ -182,14 +182,8 @@ var app = new Vue(
                 "Porta anche qualcosa da bere se ce la fai coi tempi! Ti stiamo aspettando!"
             ],
             darkMode: false,
-            toggleIcon: 'Dark'
-            // bonus
-        },
-        // updated. permettere all'ultimo messaggio inviato di essere visto indipendentemente dallo scroll
-        updated: () => {
-            const message = document.getElementsByClassName("message");
-            const lastMessageSent = message[message.length - 1];
-            lastMessageSent.scrollIntoView();
+            toggleIcon: 'Dark',
+            dropdown: false
         },
         methods: {
 
@@ -210,44 +204,58 @@ var app = new Vue(
             },
 
             // 4. funzione per recuperare la data dell'ultimo messaggio inviato
-            getLastDate: function (contact) {
-                let lastDate = contact.messages.length - 1;
-                return contact.messages[lastDate].date;
+            getLastDate: function (index) {
+                let length = this.contacts[index].messages.length - 1;
+                if (length == -1) {
+                    return "Data non disponibile";
+                }
+                return this.contacts[index].messages[length].date;
             },
 
             // 5. funzione per recuperare l'ultimo messaggio inviato
             // a. se la lunghezza del messaggio supera i 30 caratteri la tronco inserendo i puntini, altrimenti la lascio intera
-            getLastMessage: function (contact) {
-                let lastMessage = contact.messages.length - 1;
+            getLastMessage: function (contact, index) {
+                let length = this.contacts[index].messages.length - 1;
+                if (length == - 1) {
+                    return "Messaggi cancellati";
+                }
+                let lastMessage;
 
-                let lastMessageLength = contact.messages[lastMessage].text.length;
+                let lastMessageLength = contact.messages[length].text.length
 
                 if (lastMessageLength > 30) {
-                    return contact.messages[lastMessage].text.substr(0, 30) + "...";
+                    lastMessage = contact.messages[length].text.substr(0, 30) + "...";
                 } else {
-                    return contact.messages[lastMessage].text;
+                    lastMessage = contact.messages[length].text;
                 }
-            },
+                return lastMessage
 
+            },
             // 6. funzione per scrivere in pagina l'ultimo accesso
             // a. navigo fino a messages
             // b. recupero da messages la data e con split divido il giorno (dd/mm/aa) dall'ora
             // c. ottenuto un array assegno all'elemento di posizione 0 la variabile day, all'1 la variabile hour
             // d. se lo status dell'ultimo messaggio è settato su 'received', faccio il return dell'ultimo accesso, altrimenti (aggiunta bonus) stampo in pagina la stringa 'Sta scrivendo...'
-            getAccessDate: function () {
-                const getIntoMessages = this.contacts[this.contactIndex].messages;
+            getAccessDate: function (index) {
 
-                const getDate = getIntoMessages[getIntoMessages.length - 1].date.split(" ");
+                let messagesLength = this.contacts[index].messages.length - 1;
+                if (messagesLength == -1) {
+                    return "Nessun accesso recente";
+                }
 
-                const day = getDate[0];
-                const hour = getDate[1];
+                let getIntoMessages = this.contacts[index].messages;
+
+                let getDate = getIntoMessages[getIntoMessages.length - 1].date.split(" ");
+
+                let day = getDate[0];
+                let hour = getDate[1];
+
                 if (getIntoMessages[getIntoMessages.length - 1].status == 'received') {
                     return `Ultimo accesso il ${day} alle ${hour}`
                 } else {
                     return 'Sta scrivendo...'
                 }
             },
-
             // 7. funzione per mandare messaggi
             // a. inizializzo nei data newMessage a stringa vuota
             // b. pusho il nuovo oggetto con dentro il newMessage (che sarà inviato tramite @keydown.enter), la newDate (impostata con dayJS) e lo status (impostato su 'sent' in modo da far comparire il messaggio sempre a destra)
@@ -260,17 +268,19 @@ var app = new Vue(
                         text: this.newMessage,
                         status: 'sent'
                     })
+                    this.newMessage = "";
                     // risposta automatica
-                    setTimeout(() => {
+                    const bot = setTimeout(() => {
                         this.contacts[this.contactIndex].messages.push({
                             date: dayjs().format('DD/MM/YY HH:mm:ss'),
                             text: this.randomResponses[Math.floor(Math.random() * (this.randomResponses.length - 1))],
                             status: 'received'
                         })
-                    }, 6000);
+                    }, 1500);
+                    return bot;
                     // /risposta automatica
                 }
-                this.newMessage = "";
+
             },
             // 8. (aggiunta bonus) funzione per la dark mode
             toggleDarkMode: function () {
@@ -293,7 +303,33 @@ var app = new Vue(
                         }
                     }
                 );
-            }
+                return this.newSearch = "";
+            },
+            // 10. rimozione messaggio
+            removeMessage: function (msgIndex) {
+                this.contacts[this.contactIndex].messages.splice(msgIndex, 1)
+
+                if (this.contacts[this.contactIndex].messages.length == 0) {
+                    this.contacts[this.contactIndex].messages.splice(this.contactIndex, 1);
+                }
+                this.dropdown = false;
+            },
+            // 11. funzione per il toggle
+            dropdownToggle: function (index) {
+                this.messageIndex = index
+                this.dropdown = !this.dropdown;
+            },
+            // 12. Scroll automatico
+            lastMessageScroll: function () {
+                const messages = document.querySelectorAll('.message');
+                if (messages.length != 0) {
+                    messages[messages.length - 1].scrollIntoView();
+                }
+            },
+        },
+        // recall del lastMessageScroll nell'updated
+        updated() {
+            this.lastMessageScroll();
         }
     }
 );
